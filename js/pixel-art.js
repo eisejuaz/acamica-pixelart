@@ -33,8 +33,9 @@ colorPersonalizado.addEventListener('change',
     colorActual = colorPersonalizado.value;
     // Completar para que cambie el indicador-de-color al colorActual
     // $('#indicador-de-color').click(function() {
-    //   $(this).animate({'background-color': colorActual}, 0);
+    //   $(this).css('background-color', colorActual);
     // });
+    $('#indicador-de-color').css('background-color', colorActual);
   })
 );
 
@@ -70,14 +71,11 @@ $(function() {
     $('#indicador-de-color').css('background-color', $colorPicked);
   };
   
-  $('.color-paleta').click(cambiaIndicadorDeColor);
+  $('div.color-paleta').click(cambiaIndicadorDeColor);
 
   var pintaPixel = function() {
     var $colorAPintar = $('#indicador-de-color').css('background-color');
-    console.log($colorAPintar);
     $(this).css('background-color', $colorAPintar);
-    // var $pixelito = $(this).css('background-color');
-    // console.log($pixelito);
   };
 
   $('#grilla-pixeles div').click(pintaPixel);
