@@ -39,36 +39,47 @@ colorPersonalizado.addEventListener('change',
 );
 
 
-var paleta = $('#paleta');
+var $paleta = $('#paleta');
 
-var grillaPixeles = $('#grilla-pixeles');
+var $grillaPixeles = $('#grilla-pixeles');
 
 var generaPaleta = function() {
   for (let i = 0; i < nombreColores.length; i++) {
     var $nuevoDiv = $('<div>',{"class": 'color-paleta'}).css('background-color', nombreColores[i]);
-    $(paleta).append($nuevoDiv);
+    $($paleta).append($nuevoDiv);
     
-    // $(paleta).append('<div class="color-paleta"></div>');
-    // $(paleta).find('>:last-child').css('background-color', nombreColores[i]);
+    // $($paleta).append('<div class="color-paleta"></div>');
+    // $($paleta).find('>:last-child').css('background-color', nombreColores[i]);
   };
 };
-
-var creaGrilla = function() {
-  for (let i = 0; i <= 1750; i++) {
-    $(grillaPixeles).append('<div></div>');
-  };
-};
-
-function cambiaIndicadorDeColor() {
-  var $colorPicked = $(this).css('background-color');
-  $('#indicador-de-color').css('background-color', $colorPicked);
-  // console.log($colorPicked);
-};
-
-$(document).ready(function() {
-  $('.color-paleta').click(cambiaIndicadorDeColor);
-});
 
 generaPaleta();
 
+var creaGrilla = function() {
+  for (let i = 0; i <= 1750; i++) {
+    $($grillaPixeles).append('<div></div>');
+  };
+};
+
 creaGrilla();
+
+$(function() {
+
+  var cambiaIndicadorDeColor = function() {
+    var $colorPicked = $(this).css('background-color');
+    $('#indicador-de-color').css('background-color', $colorPicked);
+  };
+  
+  $('.color-paleta').click(cambiaIndicadorDeColor);
+
+  var pintaPixel = function() {
+    var $colorAPintar = $('#indicador-de-color').css('background-color');
+    console.log($colorAPintar);
+    $(this).css('background-color', $colorAPintar);
+    // var $pixelito = $(this).css('background-color');
+    // console.log($pixelito);
+  };
+
+  $('#grilla-pixeles div').click(pintaPixel);
+
+});
