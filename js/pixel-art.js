@@ -26,15 +26,18 @@ var nombreColores = ['White', 'LightYellow',
 // Es decir, el que se elige con la rueda de color.
 var colorPersonalizado = document.getElementById('color-personalizado');
 
-colorPersonalizado.addEventListener('change', 
-  (function() {
+colorPersonalizado.addEventListener('change',  
+(function() {
     // Se guarda el color de la rueda en colorActual
+    var colorActual;
     colorActual = colorPersonalizado.value;
     // Completar para que cambie el indicador-de-color al colorActual
-
-
+    // $('#indicador-de-color').click(function() {
+    //   $(this).animate({'background-color': colorActual}, 0);
+    // });
   })
 );
+
 
 var paleta = $('#paleta');
 
@@ -42,7 +45,11 @@ var grillaPixeles = $('#grilla-pixeles');
 
 var generaPaleta = function() {
   for (let i = 0; i < nombreColores.length; i++) {
-    $(paleta).append('<div class="color-paleta"></div>').animate({'background-color': 'nombreColores[i]'}, 0);
+    var $nuevoDiv = $('<div>',{"class": 'color-paleta'}).css('background-color', nombreColores[i]);
+    $(paleta).append($nuevoDiv);
+    
+    // $(paleta).append('<div class="color-paleta"></div>');
+    // $(paleta).find('>:last-child').css('background-color', nombreColores[i]);
   };
 };
 
@@ -51,6 +58,16 @@ var creaGrilla = function() {
     $(grillaPixeles).append('<div></div>');
   };
 };
+
+function cambiaIndicadorDeColor() {
+  var $colorPicked = $(this).css('background-color');
+  $('#indicador-de-color').css('background-color', $colorPicked);
+  // console.log($colorPicked);
+};
+
+$(document).ready(function() {
+  $('.color-paleta').click(cambiaIndicadorDeColor);
+});
 
 generaPaleta();
 
