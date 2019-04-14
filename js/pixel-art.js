@@ -39,10 +39,11 @@ colorPersonalizado.addEventListener('change',
   })
 );
 
-
 var $paleta = $('#paleta');
 
 var $grillaPixeles = $('#grilla-pixeles');
+
+var $mouseAbajo = false;
 
 var generaPaleta = function() {
   for (let i = 0; i < nombreColores.length; i++) {
@@ -64,6 +65,8 @@ var creaGrilla = function() {
 
 creaGrilla();
 
+var $pixelito = $('#grilla-pixeles div');
+
 $(function() {
 
   var cambiaIndicadorDeColor = function() {
@@ -73,11 +76,30 @@ $(function() {
   
   $('div.color-paleta').click(cambiaIndicadorDeColor);
 
-  var pintaPixel = function() {
-    var $colorAPintar = $('#indicador-de-color').css('background-color');
-    $(this).css('background-color', $colorAPintar);
-  };
+  // funcion abandonada para pintar un solo pixel, incorporada luego en el mousedown
+  // var pintaPixel = function() {
+  //   var $colorAPintar = $('#indicador-de-color').css('background-color');
+  //   $(this).css('background-color', $colorAPintar);
+  // };
+  // $($pixelito).click(pintaPixel);
+    
+  $($pixelito).mouseover(function(){
+    
+    $($pixelito).mousedown(function() {
+      
+      var $colorAPintar = $('#indicador-de-color').css('background-color');
+      $(this).css('background-color', $colorAPintar);
 
-  $('#grilla-pixeles div').click(pintaPixel);
+      $mouseAbajo = true;
+
+    }).mouseup(function(){
+      $mouseAbajo = false;
+    });
+
+    if ($mouseAbajo) {
+      var $colorAPintar = $('#indicador-de-color').css('background-color');
+      $(this).css('background-color', $colorAPintar);
+    };
+  });
 
 });
