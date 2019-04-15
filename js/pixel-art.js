@@ -62,7 +62,6 @@ $(function () {
 
   var $pixelito = $('#grilla-pixeles div');
   var $mouseAbajo = false;
-  var $pixelito = $('#grilla-pixeles div');
 
   var cambiaIndicadorDeColor = function () {
     var $colorPicked = $(this).css('background-color');
@@ -109,28 +108,28 @@ $(function () {
 
   // $(".imgs img").click(function(){
   //   implementacion();
-    
+
   //   console.log($superheroe);
   //   cargarSuperheroe($superheroe);
   // }); 
 
-  $('#batman').click(function(){
+  $('#batman').click(function () {
     cargarSuperheroe(batman);
   });
 
-  $('#wonder').click(function(){
+  $('#wonder').click(function () {
     cargarSuperheroe(wonder);
   });
 
-  $('#flash').click(function(){
+  $('#flash').click(function () {
     cargarSuperheroe(flash);
   });
 
-  $('#invisible').click(function(){
+  $('#invisible').click(function () {
     cargarSuperheroe(invisible);
   });
 
-  $('#guardar').click(function(){
+  $('#guardar').click(function () {
     guardarPixelArt();
   });
 });
