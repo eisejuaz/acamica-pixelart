@@ -40,22 +40,14 @@ colorPersonalizado.addEventListener('change',
 );
 
 var $paleta = $('#paleta');
-
 var $grillaPixeles = $('#grilla-pixeles');
-
-var $mouseAbajo = false;
 
 var generaPaleta = function () {
   for (let i = 0; i < nombreColores.length; i++) {
     var $nuevoDiv = $('<div>', { "class": 'color-paleta' }).css('background-color', nombreColores[i]);
     $($paleta).append($nuevoDiv);
-
-    // $($paleta).append('<div class="color-paleta"></div>');
-    // $($paleta).find('>:last-child').css('background-color', nombreColores[i]);
   };
 };
-
-generaPaleta();
 
 var creaGrilla = function () {
   for (let i = 0; i <= 1750; i++) {
@@ -63,11 +55,14 @@ var creaGrilla = function () {
   };
 };
 
+generaPaleta();
 creaGrilla();
 
-var $pixelito = $('#grilla-pixeles div');
-
 $(function () {
+
+  var $pixelito = $('#grilla-pixeles div');
+  var $mouseAbajo = false;
+  var $pixelito = $('#grilla-pixeles div');
 
   var cambiaIndicadorDeColor = function () {
     var $colorPicked = $(this).css('background-color');
@@ -105,9 +100,37 @@ $(function () {
   $($pixelito).mouseover(pintarMuchosPixels);
 
   var borrarTodo = function () {
-    $($pixelito).animate({ 'background-color': 'white' }, 1000);
+    $($pixelito).animate({ 'background-color': 'white' }, 750);
   };
 
   $('button#borrar').click(borrarTodo);
 
+  // codigo para revisar en clases
+
+  // $(".imgs img").click(function(){
+  //   implementacion();
+    
+  //   console.log($superheroe);
+  //   cargarSuperheroe($superheroe);
+  // }); 
+
+  $('#batman').click(function(){
+    cargarSuperheroe(batman);
+  });
+
+  $('#wonder').click(function(){
+    cargarSuperheroe(wonder);
+  });
+
+  $('#flash').click(function(){
+    cargarSuperheroe(flash);
+  });
+
+  $('#invisible').click(function(){
+    cargarSuperheroe(invisible);
+  });
+
+  $('#guardar').click(function(){
+    guardarPixelArt();
+  });
 });
