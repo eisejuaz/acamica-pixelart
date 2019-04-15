@@ -26,8 +26,8 @@ var nombreColores = ['White', 'LightYellow',
 // Es decir, el que se elige con la rueda de color.
 var colorPersonalizado = document.getElementById('color-personalizado');
 
-colorPersonalizado.addEventListener('change',  
-(function() {
+colorPersonalizado.addEventListener('change',
+  (function () {
     // Se guarda el color de la rueda en colorActual
     var colorActual;
     colorActual = colorPersonalizado.value;
@@ -45,11 +45,11 @@ var $grillaPixeles = $('#grilla-pixeles');
 
 var $mouseAbajo = false;
 
-var generaPaleta = function() {
+var generaPaleta = function () {
   for (let i = 0; i < nombreColores.length; i++) {
-    var $nuevoDiv = $('<div>',{"class": 'color-paleta'}).css('background-color', nombreColores[i]);
+    var $nuevoDiv = $('<div>', { "class": 'color-paleta' }).css('background-color', nombreColores[i]);
     $($paleta).append($nuevoDiv);
-    
+
     // $($paleta).append('<div class="color-paleta"></div>');
     // $($paleta).find('>:last-child').css('background-color', nombreColores[i]);
   };
@@ -57,7 +57,7 @@ var generaPaleta = function() {
 
 generaPaleta();
 
-var creaGrilla = function() {
+var creaGrilla = function () {
   for (let i = 0; i <= 1750; i++) {
     $($grillaPixeles).append('<div></div>');
   };
@@ -67,13 +67,13 @@ creaGrilla();
 
 var $pixelito = $('#grilla-pixeles div');
 
-$(function() {
+$(function () {
 
-  var cambiaIndicadorDeColor = function() {
+  var cambiaIndicadorDeColor = function () {
     var $colorPicked = $(this).css('background-color');
     $('#indicador-de-color').css('background-color', $colorPicked);
   };
-  
+
   $('div.color-paleta').click(cambiaIndicadorDeColor);
 
   // funcion abandonada para pintar un solo pixel, incorporada luego en el mousedown
@@ -82,17 +82,17 @@ $(function() {
   //   $(this).css('background-color', $colorAPintar);
   // };
   // $($pixelito).click(pintaPixel);
-    
-  $($pixelito).mouseover(function(){
-    
-    $($pixelito).mousedown(function() {
-      
+
+  var pintarMuchosPixels = function () {
+
+    $($pixelito).mousedown(function () {
+
       var $colorAPintar = $('#indicador-de-color').css('background-color');
       $(this).css('background-color', $colorAPintar);
 
       $mouseAbajo = true;
 
-    }).mouseup(function(){
+    }).mouseup(function () {
       $mouseAbajo = false;
     });
 
@@ -100,6 +100,14 @@ $(function() {
       var $colorAPintar = $('#indicador-de-color').css('background-color');
       $(this).css('background-color', $colorAPintar);
     };
-  });
+  };
+
+  $($pixelito).mouseover(pintarMuchosPixels);
+
+  var borrarTodo = function () {
+    $($pixelito).animate({ 'background-color': 'white' }, 1000);
+  };
+
+  $('button#borrar').click(borrarTodo);
 
 });
