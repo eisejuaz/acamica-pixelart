@@ -32,9 +32,6 @@ colorPersonalizado.addEventListener('change',
     var colorActual;
     colorActual = colorPersonalizado.value;
     // Completar para que cambie el indicador-de-color al colorActual
-    // $('#indicador-de-color').click(function() {
-    //   $(this).css('background-color', colorActual);
-    // });
     $('#indicador-de-color').css('background-color', colorActual);
   })
 );
@@ -61,7 +58,7 @@ creaGrilla();
 $(function () {
 
   var $pixelito = $('#grilla-pixeles div');
-  var $mouseAbajo = false;
+  var mouseAbajo = false;
 
   var cambiaIndicadorDeColor = function () {
     var $colorPicked = $(this).css('background-color');
@@ -70,29 +67,21 @@ $(function () {
 
   $('div.color-paleta').click(cambiaIndicadorDeColor);
 
-  // funcion abandonada para pintar un solo pixel, incorporada luego en el mousedown
-  // var pintaPixel = function() {
-  //   var $colorAPintar = $('#indicador-de-color').css('background-color');
-  //   $(this).css('background-color', $colorAPintar);
-  // };
-  // $($pixelito).click(pintaPixel);
+  var pintaPixel = function (e) {
+    var colorAPintar = $('#indicador-de-color').css('background-color');
+    $(e.target).css('background-color', colorAPintar);
+  };
 
-  var pintarMuchosPixels = function () {
+  $($pixelito).mousedown(function (e) {
+    pintaPixel(e);
+    mouseAbajo = true;
+  }).mouseup(function () {
+    mouseAbajo = false;
+  });
 
-    $($pixelito).mousedown(function () {
-
-      var $colorAPintar = $('#indicador-de-color').css('background-color');
-      $(this).css('background-color', $colorAPintar);
-
-      $mouseAbajo = true;
-
-    }).mouseup(function () {
-      $mouseAbajo = false;
-    });
-
-    if ($mouseAbajo) {
-      var $colorAPintar = $('#indicador-de-color').css('background-color');
-      $(this).css('background-color', $colorAPintar);
+  var pintarMuchosPixels = function (e) {
+    if (mouseAbajo) {
+      pintaPixel(e);
     };
   };
 
@@ -104,29 +93,26 @@ $(function () {
 
   $('button#borrar').click(borrarTodo);
 
-  // codigo para revisar en clases
+  $(".imgs img").click(function (e) {
+    var superHeroeCapturado = $(e.target).attr('id');
+    switch (superHeroeCapturado) {
+      case 'batman':
+        superHeroeCapturado = batman;
+        break;
 
-  // $(".imgs img").click(function(){
-  //   implementacion();
+      case 'wonder':
+        superHeroeCapturado = wonder;
+        break;
 
-  //   console.log($superheroe);
-  //   cargarSuperheroe($superheroe);
-  // }); 
+      case 'flash':
+        superHeroeCapturado = flash;
+        break;
 
-  $('#batman').click(function () {
-    cargarSuperheroe(batman);
-  });
-
-  $('#wonder').click(function () {
-    cargarSuperheroe(wonder);
-  });
-
-  $('#flash').click(function () {
-    cargarSuperheroe(flash);
-  });
-
-  $('#invisible').click(function () {
-    cargarSuperheroe(invisible);
+      case 'invisible':
+        superHeroeCapturado = invisible;
+        break;
+    }
+    cargarSuperheroe(superHeroeCapturado);
   });
 
   $('#guardar').click(function () {
